@@ -192,11 +192,51 @@ Use the getAverageWordLength function below to do the following:
 
   For example: getAverageWordLength(originalFlavors) should return a number between 0 and 3.     
 */
-const words = originalFlavors.join('')
-function getAverageWordLength(array){
-  return words.length / array.length;
+// const words = originalFlavors.join('')
+// function getAverageWordLength(array){
+//   return words.length / array.length;
+// }
+// console.log('STRETCH 1', getAverageWordLength(originalFlavors));
+
+// Create a helper function to count the words in a string
+function getWordCountOfString(string) {
+  // Split the given string between its spaces, and store each word in an array
+  const splitStringArray = string.split(" ");
+  // Record the length of the above array to get the word count of the original string
+  const numberOfWordsInString = splitStringArray.length;
+  // Return the number of words in the string
+  return numberOfWordsInString;
 }
-console.log('STRETCH 1', getAverageWordLength(originalFlavors));
+function getAverageWordLength(array) {
+  // Create an empty array to hold the word count for each item of a given array
+  const wordCountPerItemArray = [];
+  // Loop through each item in the original input array
+  for (let i = 0; i < array.length; i++) {
+    // Add the word count of the item at the current index to the word counting array
+    wordCountPerItemArray.push(getWordCountOfString(array[i]));
+  }
+  // Create a variable to store the total number of words in the array
+  let totalWordCount = 0;
+  // Loop through each item of the word counting array
+  for (let i = 0; i < wordCountPerItemArray.length; i++) {
+    // Add up and store the count of all the words in the array
+    totalWordCount += wordCountPerItemArray[i];
+  }
+  // Calculate the average number of words per item
+  const averageNumberOfWordsPerItem =
+    totalWordCount / wordCountPerItemArray.length;
+  // Return the calculated average
+  return averageNumberOfWordsPerItem;
+}
+// Create a test array to check answer
+const testArray = [
+  "J.R.R. Tokein",
+  "Hideo Kojima",
+  "Don Quixote de la Mancha",
+];
+// Check if the function works
+console.log("Stretch 1: Average Word Length ", getAverageWordLength(testArray));
+
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪
 Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors 
@@ -209,21 +249,7 @@ Use the getRandomFlavors function and new arrays below to do the following:
 
   For example: getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors) might return ["Strawberry Cheesecake", "Eggnog,"..."Chocolate"].
 */
-
-
-// function getRandomFlavors(array){
-// const randomFlavors = [];
-//   array = [originalFlavors, newFlavors, seasonalFlavors, regionalFlavors]
-// for (let i = 0; i < array.length; i++){
-//   if (array.length > 31){
-//     randomFlavors.push(array[i]);
-//   }
-// }
-// return randomFlavors;
-// }
-// console.log('STRETCH 2', getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
-
-// NEW DATA ARRAYS FOR STRETCH 2 ⬇️
+       
 const newFlavors = [
   "Date night",
   "U.S.S Butterscotch (Stranger Things special)",
@@ -302,53 +328,25 @@ const regionalFlavors = [
   "Quarterback Crunch",
   "Chocolate Chocolate Chip Cheesecake",
   "Caramel 'n' Cookies"
-]
+]                                        
+function getRandomFlavors(arr1,arr2,arr3,arr4){
+  let flavours = [arr1,arr2,arr3,arr4];
+  let randomFlavors = [];
+  while (randomFlavors.length !== 31){
+    let randomItem = [...flavours[Math.floor(Math.random()*4)]];
+        randomItem = randomItem[Math.floor(Math.random()*randomItem.length)];
+    randomFlavors.push(randomItem);
+  };
+return randomFlavors;
+}
 
-// // function getRandomFlavors(array1,array2,array3,array4){
-// //   let randomFlavors = array1[Math.floor(Math.random()*array1.length)]
-// // return randomFlavors
-// // }
-// // console.log('STRETCH 2', getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
+console.log('STRETCH 2', getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
+
+// NEW DATA ARRAYS FOR STRETCH 2 ⬇️
 
 
-// // function getRandomFlavors(array1,array2,array3,array4){
-// //   const array = array1 || array2 || array3 || array4
-// //   const newArray = array[Math.floor(Math.random()*array.length)]
-// //   for (let i=0; i<array.length; i++){
-// //   if (array[i].includes()){
-// //   newArray.push(array[i]);
-// // }
-// //   }
-// // return newArray;
-// // }
 
-// function getRandomFlavors(...args){
-//   const randomFlavors = [];
-//   const array = array1 || array2 || array3 || array4
-//   const newArray = array[Math.floor(Math.random()*array.length)]
-//   for (let i=0; i<array.length; i++){
-//   if (array[i].includes()){
-//   randomFlavors.push(array[i]);
-// }
-//   }
-// return randomFlavors;
-// }
 
-// console.log('STRETCH 2', getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
-
-function getRandomFlavors(array){
-  const randomFlavors = [];
-    array = [originalFlavors, newFlavors, seasonalFlavors, regionalFlavors]
-  for (let i = 0; i < array.length; i++){
-    if (array.length > 31){
-      randomFlavors.push(array[i]);
-    }
-  }
-  return randomFlavors;
-  }
-  console.log('STRETCH 2', getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
-
-  
 
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
 function foo(){
